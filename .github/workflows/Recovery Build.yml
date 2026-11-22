@@ -40,7 +40,7 @@ on:
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
-        default: 'vendorboot'
+        default: 'boot'
 
 jobs:
   build:
@@ -152,7 +152,7 @@ jobs:
       run: |
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        lunch twrp_ZN137-eng && make clean && make vendorbootimage -j$(nproc --all)
+        lunch twrp_ZN137-eng && make clean && make bootimage -j$(nproc --all)
         ls -lh out/target/product/ZN137/*.img
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
@@ -167,6 +167,6 @@ jobs:
         body: |
           Manifest: twrp-12.1
           Device: ZN137
-          Target: vendor_boot.img
+          Target: boot.img
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
